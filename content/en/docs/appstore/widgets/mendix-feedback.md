@@ -126,7 +126,7 @@ The Feedback widget uses the HTML2Canvas library which attempts to make an image
 If you cannot see your feedback items on the Developer Portal's **Feedback** page, it is possible that you have configured a wrong **App ID** or **Feedback server location**. Please check if all the configurations are filled in per the [Configuration](#configuration) section above.
 
 
-### 4.3 Create a new Microflow to retrieve DecryptedToken {#create-a-new-microflow-to-retrieve-decryptedtoken}
+### 4.4 Create a new Microflow to retrieve DecryptedToken {#create-a-new-microflow-to-retrieve-decryptedtoken}
 
 In MendixSSO 3, the Microflow **DS_GetCurrentIdToken** is deprecated. You will need to create a new microflow in your own module to retrive the **DecryptedToken**. Place **SUB_GetDecryptedTokenByTypeForCurrentSessionn** in this new Microflow, and then use it in MendixSSO Authentication.
 
