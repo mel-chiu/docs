@@ -47,8 +47,9 @@ You can configure the widget for certain actions in your app. All the configurat
     {{% alert color="info" %}}For the best user experience, your are strongly encouraged to apply Mendix SSO to your app and connect the Mendix SSO module to the Mendix Feedback widget version 8.2.1 or above. Choose only one of the authentication methods: either **MendixSSO** or **Custom Authentication**.
     {{% /alert %}}
     *  **MendixSSO** – if Mendix SSO is applied and the following settings are configured correctly, the end-user can leave feedback without having to enter their name and email address
-        * **ID token microflow** – select the **DS_GetCurrentIdToken** microflow from the Mendix SSO module
-        * **Decrypted Token Value** – select the **Value** attribute from it
+        * **ID token microflow** – select the **DS_GetCurrentIdToken** microflow from the Mendix SSO module. 
+        {{% alert color="info" %}}If you are using MendixSSO 3, please follow the [Create a new microflow to retrieve Decrypted Token](#create-a-new-microflow-to-retrieve-decryptedtoken) section.{{% /alert %}}
+        * **Decrypted Token Value** – select the **Value** attribute from it. The default if **Value** in the MendixSSO module. 
         
         See the screenshot below for an example:
         
@@ -88,11 +89,11 @@ You can place the widget on any form in your app, but it needs to be placed on o
 
 When you click the **Feedback icon**, the Mendix Platform first checks if you are signed in. If you are not signed in, you will need to either **Sign in to Mendix** or **Continue as a guest** to enter feedback mode:
 
-{{< figure src="/attachments/appstore/widgets/mendix-feedback/feedback-mode.png" >}}
+![image](https://user-images.githubusercontent.com/56417930/170002390-1302b618-eca0-4596-9660-cf8a5cfb4f5a.png)
 
 Once you are in feedback mode, you can click anywhere on the screen to **leave a comment**:
 
-{{< figure src="/attachments/appstore/widgets/mendix-feedback/add-comment.png" >}}
+![image](https://user-images.githubusercontent.com/56417930/170002431-95b8e91a-1d11-4581-8ab1-436cf70267f6.png)
 
 And voila! A screenshot of the current page is created, which you can choose to attach to your feedback. After clicking **Submit**, your feedback will go straight to the [Feedback](/developerportal/collaborate/feedback/) page of the app in the Developer Portal.
 
@@ -123,3 +124,17 @@ The Feedback widget uses the HTML2Canvas library which attempts to make an image
 ### 4.3 Feedback Item Does Not Show on the Developer portal
 
 If you cannot see your feedback items on the Developer Portal's **Feedback** page, it is possible that you have configured a wrong **App ID** or **Feedback server location**. Please check if all the configurations are filled in per the [Configuration](#configuration) section above.
+
+
+### 4.3 Create a new Microflow to retrieve DecryptedToken {#create-a-new-microflow-to-retrieve-decryptedtoken}
+
+In MendixSSO 3, the Microflow **DS_GetCurrentIdToken** is deprecated. You will need to create a new microflow in your own module to retrive the **DecryptedToken**. Place **SUB_GetDecryptedTokenByTypeForCurrentSessionn** in this new Microflow, and then use it in MendixSSO Authentication.
+
+![image](https://user-images.githubusercontent.com/56417930/169999409-b22a9a48-31d5-445a-a018-2492fc19e0f4.png)
+![image](https://user-images.githubusercontent.com/56417930/170002271-6ea84ba3-c76c-414c-8183-4be8703f439a.png)
+
+
+The tokenType argument is **MendixSSO.TokenType.ID_TOKEN**
+![image](https://user-images.githubusercontent.com/56417930/169999720-d1cb0515-24e8-4525-ba96-4f4160d461af.png)
+
+ 
